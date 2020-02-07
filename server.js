@@ -1,24 +1,29 @@
-const http = require("http");
+
+const express = require('express')
+const app = express()
+const path = require("path");
 
 // Define a port to listen for incoming requests
 const PORT = process.env.PORT || 8080;
 
 // Create a generic function to handle requests and responses
-function handleRequest(request, response) {
-
-  // Send the below string to the client when the user visits the PORT URL
-  response.end("It Works!! Boom shakalaka Path Hit: " + request.url);
-}
-
-// Use the Node HTTP package to create our server.
-// Pass the handleRequest function to empower it with functionality.
-const server = http.createServer(handleRequest);
-
-// Start our server so that it can begin listening to client requests.
-server.listen(PORT, function() {
-
-  // Log (server-side) when our server has started
-  console.log("Server listening on: http://localhost:" + PORT);
+app.get("/", function (req, res) {
+  // res.send("Welcome to the Star Wars Page!")
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
+app.get("/table", function (req, res) {
+  // res.send("Welcome to the Star Wars Page!")
+  res.sendFile(path.join(__dirname, "table.html"));
+});
+
+app.get("/reserve", function (req, res) {
+  // res.send("Welcome to the Star Wars Page!")
+  res.sendFile(path.join(__dirname, "reserve.html"));
+});
+
+
+app.listen(PORT, function () {
+  console.log("App listening on PORT " + PORT);
+});
 

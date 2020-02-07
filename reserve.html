@@ -43,24 +43,24 @@
             Table Reservation
           </div>
           <div class="card-body">
-            <form role="form">
+            <form method='POST' role="form">
               <div class="form-group">
-                <label for="reserve-name">Name</label>
-                <input type="text" class="form-control" id="reserve-name">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name">
               </div>
               <div class="form-group">
-                <label for="reserve-phone">Phone Number</label>
-                <input type="text" class="form-control" id="reserve-phone">
+                <label for="phone">Phone Number</label>
+                <input type="text" class="form-control" id="phone">
               </div>
               <div class="form-group">
-                <label for="reserve-email">Email</label>
-                <input type="text" class="form-control" id="reserve-email">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email">
               </div>
               <div class="form-group">
-                <label for="reserve-unique-id">Unique ID</label>
-                <input type="text" class="form-control" id="reserve-unique-id">
+                <label for="uid">Unique ID</label>
+                <input type="text" class="form-control" id="uid">
               </div>
-              <button type="submit" class="btn btn-primary submit">Submit</button>
+              <button id='submit' type="submit" class="btn btn-primary submit">Submit</button>
             </form>
           </div>
         </div>
@@ -71,13 +71,32 @@
     <footer class="footer">
       <div class="container">
         <p>
-          <a href="/api/tables">API Table Link</a> |
+          <a href="/api/table">API Table Link</a> |
           <a href="/api/waitlist">API Wait List</a>
       </div>
     </footer>
 
   </div>
 
+  <script type='text/javascript'>
+    $('#submit').on('click', function (event) {
+      alert('working');
+      event.preventDefault();
+      var newTable = {
+        name: $('#name').val().trim(),
+        phone: $('#phone').val().trim(),
+        email: $('#email').val().trim(),
+        UID: $('#uid').val().trim()
+      };
+      $.post('/api/table', newTable)
+        .then(function (data) {
+          console.log(data)
+          alert('tis working')
+        })
+    });
+
+
+  </script>
 </body>
 
 </html>
